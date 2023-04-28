@@ -2,75 +2,82 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
+import { useState, useEffect } from 'react';
+
 
 export default function GalleryGrid() {
-  return (
-    <Box sx={{ width: '100%'}}>
-      <ImageList variant="masonry" cols={2} gap={8}>
-        <div><p>HOLA</p></div>
-        {itemData.map((item) => (
-          <ImageListItem key={item.img}>
-            <img
-              src={`${item.img}?w=248&fit=crop&auto=format`}
-              srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
-              alt={item.title}
-              loading="lazy"
-            />
-          </ImageListItem>
-        ))}
-      </ImageList>
-    </Box>
-  );
+    const [isMobile, setIsMobile] = useState(false);
+    function handleResize() {
+        setIsMobile(window.innerWidth < 960);
+      }
+        // Agregar el event listener para manejar el resize
+  window.addEventListener('resize', handleResize);
+
+  // Eliminar el event listener cuando se desmonta el componente
+  useEffect(() => {
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+
+    return (
+        <Box sx={{ width: '100%' }}>
+            <ImageList variant="masonry" cols={isMobile? '1' : '2'} gap={12}>
+                <div className='text-blue-gattai font-larken'>
+                    <p>
+                    En Gattai vuestra boda pasará a ser nuestro proyecto e iremos tan lejos como queráis. Creamos identidades gráficas para las bodas que se pueden trasladar a cualquier nivel.</p>
+                    <br></br>
+                    <p>Desde las invitaciones, sittings, menús... hasta cualquier idea loca de regalo para invitados o elementos de decoración del espacio.</p>
+                    <br></br>
+                    <p>Os queremos conocer ver como vibráis y conseguir que todo lo que hagamos sea único para vuestro día más especial.</p>
+                    <br></br>
+                    </div>
+                    <br></br>
+                {itemData.map((item) => (
+                    <ImageListItem key={item.img}>
+                        <img
+                            src={`${item.img}?w=248&fit=crop&auto=format`}
+                            srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
+                            alt={item.title}
+                            loading="lazy"
+                        />
+                    </ImageListItem>
+                ))}
+            </ImageList>
+        </Box>
+    );
 }
 
 const itemData = [
-  {
-    img: 'https://images.unsplash.com/photo-1549388604-817d15aa0110',
-    title: 'Bed',
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1525097487452-6278ff080c31',
-    title: 'Books',
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1523413651479-597eb2da0ad6',
-    title: 'Sink',
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1563298723-dcfebaa392e3',
-    title: 'Kitchen',
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1588436706487-9d55d73a39e3',
-    title: 'Blinds',
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1574180045827-681f8a1a9622',
-    title: 'Chairs',
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1530731141654-5993c3016c77',
-    title: 'Laptop',
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1481277542470-605612bd2d61',
-    title: 'Doors',
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1517487881594-2787fef5ebf7',
-    title: 'Coffee',
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1516455207990-7a41ce80f7ee',
-    title: 'Storage',
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1597262975002-c5c3b14bbd62',
-    title: 'Candle',
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1519710164239-da123dc03ef4',
-    title: 'Coffee table',
-  },
+    
+    {
+        img: 'https://cdn.discordapp.com/attachments/1101456837330608218/1101456874827689984/21112019-DAG07390.jpg',
+        title: 'CONO',
+    },
+    {
+        img: 'https://cdn.discordapp.com/attachments/1101456837330608218/1101457500387152044/paper-mockup-scene.png',
+        title: 'SAY YES',
+    },
+    {
+        img: 'https://cdn.discordapp.com/attachments/1101456837330608218/1101457827043745873/LoreAlex-1206.jpg',
+        title: 'NEON',
+    },
+    {
+        img: 'https://cdn.discordapp.com/attachments/1101456837330608218/1101457865283211274/LoreAlex-1075.jpg',
+        title: 'TEQUILA',
+    },
+    {
+        img: 'https://cdn.discordapp.com/attachments/1101456837330608218/1101457952184995880/453ee08b-e6fe-4d40-9938-5bab79f6f329.jpg',
+        title: 'INIVI MONTAÑA',
+    },
+    {
+        img: 'https://cdn.discordapp.com/attachments/1101456837330608218/1101458223631958016/Rectangle_2.jpg',
+        title: 'INIVI RED',
+    },
+    {
+        img: 'https://cdn.discordapp.com/attachments/1101456837330608218/1101468777377452062/Rectangle-2.jpg',
+        title: 'INIVI RED',
+    },
 ];
 
